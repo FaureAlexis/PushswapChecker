@@ -38,10 +38,11 @@ checkInt [] = True
 checkInt (x:xs) | isIntstr x == True = checkInt xs
                 | otherwise = False
 
---myStrToInt :: String -> Int
---myStrToInt [] = []
---myStrToInt (x:xs) = digitToInt x :myStrToInt xs
---
---myStrListoIntList :: [String] -> [Int]
---myStrListoIntList (x:xs) = myStrToInt
---
+myStrToInt :: String -> Int
+myStrToInt [] = 0
+myStrToInt (x:xs) = (digitToInt x) + ((myStrToInt xs) * 10)
+
+myStrListoIntList :: [String] -> [Int]
+myStrListoIntList [] = []
+myStrListoIntList (x:xs) = (myStrToInt (reverse x)):(myStrListoIntList xs)
+
