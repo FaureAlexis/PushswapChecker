@@ -5,9 +5,11 @@
 ## D10
 ##
 
-SRC		=	Main.hs 			\
-			src/bintree/Tree.hs \
-			src/error/Exit.hs
+SRC		=	Main.hs 							\
+			src/tree/Tree.hs 					\
+			src/error/Exit.hs					\
+			src/pushswap/PushswapFunctions.hs	\
+			src/checker/Checker.hs
 
 NAME	=	pushswap_checker
 

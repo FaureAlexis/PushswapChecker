@@ -5,7 +5,7 @@
 -- pushswap checker
 -}
 
-import Data.Char
+module Src.Pushswap.PushswapFunctions where
 
 saAndSbSwap :: [String] -> String -> [String]
 saAndSbSwap (x:xs) n =  x : n : xs
@@ -23,6 +23,10 @@ paAndPbFunc a (x:xs) = (x:a, xs)
 raAndRbFunc :: [String] -> [String]
 raAndRbFunc [] = []
 raAndRbFunc (x:xs) = reverse (x : reverse xs)
+
+rraAndRrbFunc :: [String] -> [String]
+rraAndRrbFunc [] = []
+rraAndRrbFunc f = raAndRbFunc (reverse f)
 
 isIntchar :: Char -> Bool
 isIntchar (x) | x >= '0' && x <= '9' = True
