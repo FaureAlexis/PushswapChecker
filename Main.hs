@@ -5,8 +5,11 @@
 -- DoOp.sh
 -}
 
+import System.IO (hGetLine, stdin)
+import System.Directory.Internal.Prelude (getArgs)
+import Foreign.Marshal.Unsafe (unsafeLocalState)
 import Src.Checker.Checker (parseAction, wordsWhen)
-import System.IO ( hGetLine, stdin )
+
 main :: IO ()
 main = parseAction (wordsWhen (==' ') (unsafeLocalState (hGetLine stdin)))
-    (unsafeLocalState  getArgs) []
+    (unsafeLocalState getArgs) []
