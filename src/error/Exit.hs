@@ -9,7 +9,6 @@ module Src.Error.Exit where
 import System.Exit (ExitCode (ExitFailure), exitWith)
 import System.IO (hPutStrLn, stderr)
 
-
 -- / Exit and display an error message on standard error stream :
 -- / Usage : exitWithErrorMessage <message: String> <exit code: ExitCode>
 -- / Example : exitWithErrorMessage "Missing argument" (ExitFailure 84)
