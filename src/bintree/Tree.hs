@@ -5,7 +5,7 @@
 -- Tree.sh
 -}
 
-module Tree where
+module Src.Bintree.Tree where
 
 data Tree a = Empty | Node (Tree a) a (Tree a) deriving (Show)
 
