@@ -30,6 +30,7 @@ rraAndRrbFunc [] = []
 rraAndRrbFunc f = reverse (raAndRbFunc (reverse f))
 
 isIntchar :: Char -> Bool
+isIntchar '-' = True
 isIntchar x | x >= '0' && x <= '9' = True
             | otherwise = False
 
@@ -45,11 +46,16 @@ checkInt (x:xs) | isIntstr x == True = checkInt xs
 
 myStrToInt :: String -> Int
 myStrToInt [] = 0
+myStrToInt ('-':xs) = ((myStrToInt xs) * (-1))
 myStrToInt (x:xs) = (digitToInt x) + ((myStrToInt xs) * 10)
+
+isNegStrtoInt :: String -> Int
+isNegStrtoInt ('-':xs) = myStrToInt (reverse xs) * (-1)
+isNegStrtoInt n = myStrToInt (reverse n)
 
 myStrListoIntList :: [String] -> [Int]
 myStrListoIntList [] = []
-myStrListoIntList (x:xs) = (myStrToInt (reverse x)):(myStrListoIntList xs)
+myStrListoIntList (x:xs) = (isNegStrtoInt x):(myStrListoIntList xs)
 
 
 getArgsToInt :: [String] -> [Int]
