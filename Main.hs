@@ -42,7 +42,7 @@ printResult a b | a == treeSort a && null b = print "OK"
                 | otherwise = print "KO:" >>
                   print (a, b)
 
-parthAction :: [String] -> [String] -> [String] -> IO ()
+parthAction :: [String] -> [String] -> [Int] -> IO ()
 parthAction [] a b = printResult a b
 parthAction (x:xs) a b | x == "sa" = parthAction xs (saAndSbFunc a) b
                        | x == "sb" = parthAction xs a (saAndSbFunc b)
