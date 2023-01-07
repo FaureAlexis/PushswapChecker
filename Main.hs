@@ -7,8 +7,16 @@
 
 import System.Directory.Internal.Prelude (getArgs)
 import System.IO (stdin, hGetLine)
-import Tree (treeSort)
 import Foreign.Marshal.Unsafe (unsafeLocalState)
+import Text.Show (show)
+import Src.Bintree.Tree (treeSort)
+import Src.Error.Exit (exitWithErrorMessage)
+
+data Result = Ok | Ko ([String], [String])
+
+instance Show Result where
+    show Ok = "OK"
+    show (Ko t) = "KO:" ++ show t
 
 saAndSbSwap :: [String] -> String -> [String]
 saAndSbSwap (x:xs) n =  x : n : xs
@@ -38,29 +46,30 @@ wordsWhen f s =  case dropWhile f s of
                             where (w, y) = break f x
 
 printResult :: [String] -> [String] -> IO ()
-printResult a b | a == treeSort a && null b = print "OK"
-                | otherwise = print "KO:" >>
-                  print (a, b)
+printResult [] _ = putStrLn (Ko ([], []))
+printResult a b | a == treeSort a && null b = putStrLn Ok
+                | otherwise = putStrLn (Ko (a, b))
 
 parthAction :: [String] -> [String] -> [String] -> IO ()
 parthAction [] a b = printResult a b
-parthAction (x:xs) a b | x == "sa" = parthAction xs (saAndSbFunc a) b
-                       | x == "sb" = parthAction xs a (saAndSbFunc b)
-                       | x == "sc" = parthAction xs (saAndSbFunc a)
+parthAction ("sa":xs) a b = parthAction xs (saAndSbFunc a) b
+parthAction ("sb":xs) a b = parthAction xs a (saAndSbFunc b)
+parthAction ("sc":xs) a b = parthAction xs (saAndSbFunc a)
                         (saAndSbFunc b)
-                       | x == "pa" = parthAction xs (fst (paAndPbFunc a b))
+parthAction ("pa":xs) a b = parthAction xs (fst (paAndPbFunc a b))
                         (snd (paAndPbFunc a b))
-                       | x == "pb" = parthAction xs (snd (paAndPbFunc b a))
+parthAction ("pb":xs) a b = parthAction xs (snd (paAndPbFunc b a))
                         (fst (paAndPbFunc b a))
-                       | x == "ra" = parthAction xs (raAndRbFunc a) b
-                       | x == "rb" = parthAction xs a (raAndRbFunc b)
-                       | x == "rr" = parthAction xs (raAndRbFunc a)
+parthAction ("ra":xs) a b = parthAction xs (raAndRbFunc a) b
+parthAction ("rb":xs) a b = parthAction xs a (raAndRbFunc b)
+parthAction ("rr":xs) a b = parthAction xs (raAndRbFunc a)
                         (raAndRbFunc b)
-                       | x == "rra" = parthAction xs (rraAndRrbFunc a) b
-                       | x == "rrb" = parthAction xs a (rraAndRrbFunc b)
-                       | x == "rrr" = parthAction xs (rraAndRrbFunc a)
+parthAction ("rra":xs) a b = parthAction xs (rraAndRrbFunc a) b
+parthAction ("rrb":xs) a b = parthAction xs a (rraAndRrbFunc b)
+parthAction ("rrr":xs) a b = parthAction xs (rraAndRrbFunc a)
                         (rraAndRrbFunc b)
-                       | otherwise = print x
+parthAction (x:_) _ _ = exitWithErrorMessage (x ++ " is not an action")
 
-main :: IO()
-main = parthAction (wordsWhen (==' ') (unsafeLocalState (hGetLine stdin))) (unsafeLocalState  getArgs) []
+main :: IO ()
+main = parthAction (wordsWhen (==' ') (unsafeLocalState (hGetLine stdin)))
+ (unsafeLocalState  getArgs) []

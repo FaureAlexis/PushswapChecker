@@ -5,8 +5,9 @@
 ## D10
 ##
 
-SRC		=	Main.hs \
-			Tree.hs
+SRC		=	Main.hs 			\
+			src/bintree/Tree.hs \
+			src/error/Exit.hs
 
 NAME	=	pushswap_checker
 
