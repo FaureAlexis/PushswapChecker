@@ -7,7 +7,7 @@
 
 module Src.Checker.Checker where
 import Src.Bintree.Tree (treeSort)
-import Src.Error.Exit (errorBadAction, errorNoActionsProvided)
+import Src.Error.Exit (errorBadAction, errorNoActionsProvided, errorBadArgsList)
 import Src.Pushswap.PushswapFunctions (saAndSbFunc, paAndPbFunc,
  raAndRbFunc, rraAndRrbFunc)
 
@@ -19,9 +19,8 @@ wordsWhen f s =  case dropWhile f s of
                             where (w, y) = break f x
 
 printResult :: [Int] -> [Int] -> IO ()
-printResult [] _ = errorNoActionsProvided
 printResult a b | a == treeSort a && null b = putStrLn "OK"
-                | otherwise = putStrLn "KO: " >> print (a, b)
+                | otherwise = putStr "KO: " >> print (a, b)
 
 suitParseAction :: [String] -> [Int] -> [Int] -> IO ()
 suitParseAction ("ra":xs) a b = parseAction xs (raAndRbFunc a) b
@@ -35,6 +34,7 @@ suitParseAction ("rrr":xs) a b = parseAction xs (rraAndRrbFunc a)
 suitParseAction _ _ _ = errorBadAction
 
 parseAction :: [String] -> [Int] -> [Int] -> IO ()
+parseAction  _ [] [] = errorBadArgsList
 parseAction [] a b = printResult a b
 parseAction ("sa":xs) a b = parseAction xs (saAndSbFunc a) b
 parseAction ("sb":xs) a b = parseAction xs a (saAndSbFunc b)

@@ -6,25 +6,26 @@
 -}
 
 module Src.Pushswap.PushswapFunctions where
+import Data.Char (digitToInt)
 
-saAndSbSwap :: [String] -> String -> [String]
+saAndSbSwap :: [Int] -> Int -> [Int]
 saAndSbSwap (x:xs) n =  x : n : xs
 
-saAndSbFunc :: [String] -> [String]
+saAndSbFunc :: [Int] -> [Int]
 saAndSbFunc [] = []
 saAndSbFunc (x:xs) | null xs = [x]
                    | otherwise = saAndSbSwap xs x
 
-paAndPbFunc :: [String] -> [String] -> ([String], [String])
+paAndPbFunc :: [Int] -> [Int] -> ([Int], [Int])
 paAndPbFunc a [] = (a, [])
 paAndPbFunc [] (x:xs) = ([x], xs)
 paAndPbFunc a (x:xs) = (x:a, xs)
 
-raAndRbFunc :: [String] -> [String]
+raAndRbFunc :: [Int] -> [Int]
 raAndRbFunc [] = []
 raAndRbFunc (x:xs) = reverse (x : reverse xs)
 
-rraAndRrbFunc :: [String] -> [String]
+rraAndRrbFunc :: [Int] -> [Int]
 rraAndRrbFunc [] = []
 rraAndRrbFunc f = raAndRbFunc (reverse f)
 
@@ -50,3 +51,8 @@ myStrListoIntList :: [String] -> [Int]
 myStrListoIntList [] = []
 myStrListoIntList (x:xs) = (myStrToInt (reverse x)):(myStrListoIntList xs)
 
+
+getArgsToInt :: [String] -> [Int]
+getArgsToInt [] = []
+getArgsToInt s | checkInt s = myStrListoIntList s
+               | otherwise = []

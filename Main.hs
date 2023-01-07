@@ -9,8 +9,8 @@ import System.IO (hGetLine, stdin)
 import System.Directory.Internal.Prelude (getArgs)
 import Foreign.Marshal.Unsafe (unsafeLocalState)
 import Src.Checker.Checker (parseAction, wordsWhen)
-import Src.Pushswap.PushswapFunctions (checkInt)
+import Src.Pushswap.PushswapFunctions (getArgsToInt)
 
 main :: IO ()
 main = parseAction (wordsWhen (==' ') (unsafeLocalState (hGetLine stdin)))
-    (checkInt (unsafeLocalState getArgs)) []
+    (getArgsToInt (unsafeLocalState getArgs)) []
