@@ -28,3 +28,10 @@ errorNoActionsProvided :: IO a
 errorNoActionsProvided = exitWithErrorMessage
         "No actions where provided on standard input stream. Please see --help"
         (ExitFailure 84)
+
+-- / Exit and display an error message when there is a bad action :
+-- / Usage : errorBadAction
+errorBadAction :: IO a
+errorBadAction = exitWithErrorMessage
+        "Bad action provided on standard input stream. Please see --help"
+        (ExitFailure 84)
