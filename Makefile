@@ -5,7 +5,8 @@
 ## D10
 ##
 
-SRC		=	Main.hs
+SRC		=	Main.hs \
+			Tree.hs
 
 NAME	=	pushswap_checker
 
