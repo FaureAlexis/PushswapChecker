@@ -7,6 +7,7 @@
 
 import Src.Checker.Checker (parseAction, wordsWhen)
 import System.IO ( hGetLine, stdin )
+
 main :: IO ()
 main = parseAction (wordsWhen (==' ') (unsafeLocalState (hGetLine stdin)))
     (unsafeLocalState  getArgs) []
