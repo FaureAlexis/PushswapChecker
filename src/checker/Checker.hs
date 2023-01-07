@@ -7,7 +7,7 @@
 
 module Src.Checker.Checker where
 import Src.Bintree.Tree (treeSort)
-import Src.Error.Exit (errorBadAction, errorNoActionsProvided, errorBadArgsList)
+import Src.Error.Exit (errorBadAction, errorBadArgsList)
 import Src.Pushswap.PushswapFunctions (saAndSbFunc, paAndPbFunc,
  raAndRbFunc, rraAndRrbFunc)
 

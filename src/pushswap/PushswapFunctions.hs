@@ -30,7 +30,7 @@ rraAndRrbFunc [] = []
 rraAndRrbFunc f = reverse (raAndRbFunc (reverse f))
 
 isIntchar :: Char -> Bool
-isIntchar (x) | x >= '0' && x <= '9' = True
+isIntchar x | x >= '0' && x <= '9' = True
             | otherwise = False
 
 isIntstr :: String -> Bool
