@@ -27,7 +27,7 @@ raAndRbFunc (x:xs) = reverse (x : reverse xs)
 
 rraAndRrbFunc :: [Int] -> [Int]
 rraAndRrbFunc [] = []
-rraAndRrbFunc f = raAndRbFunc (reverse f)
+rraAndRrbFunc f = reverse (raAndRbFunc (reverse f))
 
 isIntchar :: Char -> Bool
 isIntchar (x) | x >= '0' && x <= '9' = True
