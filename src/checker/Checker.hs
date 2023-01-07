@@ -12,7 +12,7 @@ import Foreign.Marshal.Unsafe (unsafeLocalState)
 import Text.Show (show)
 import Src.Bintree.Tree (treeSort)
 
-import Src.Error.Exit
+import Src.Error.Exit (errorBadAction)
 
 data Result = Ok | Ko ([String], [String])
 
