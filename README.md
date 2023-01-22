@@ -6,7 +6,9 @@ The goal of this project is to make a program in Haskell, which take a list of n
 ### Results
 
 Automated tests : 100%
+
 Coding style errors : 0
+
 Bonus : Unit tests (tdd)
 
 ## Build
